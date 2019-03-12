@@ -24,5 +24,21 @@ namespace Loto
         {
             InitializeComponent();
         }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void supBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

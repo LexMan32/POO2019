@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Loto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Loto 2019" Height="450" Width="568.908">
     <Grid>
-        
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="58" Margin="6,10,0,0" VerticalAlignment="Top" Width="549">
+            <Grid>
+                <Image x:Name="Logo1" Margin="10,4,427,5" Source="Loto_logo_2008.jpg" Stretch="Fill"/>
+                <Grid>
+                    <Button x:Name="addBtn" Content="+" HorizontalAlignment="Left" Margin="196,16,0,0" VerticalAlignment="Top" Width="22" FontWeight="Bold" Height="26" Click="addBtn_Click"/>
+                    <Button x:Name="delBtn" Content="Effacer" HorizontalAlignment="Left" Margin="234,16,0,0" VerticalAlignment="Top" Width="84" FontWeight="Bold" Height="26" Click="delBtn_Click"/>
+                    <Button x:Name="supBtn" Content="-" HorizontalAlignment="Left" Margin="335,16,0,0" VerticalAlignment="Top" Width="22" FontWeight="Bold" Height="26" Click="supBtn_Click"/>
+                </Grid>
+                <Image x:Name="Logo2" Margin="427,4,10,5" Source="Loto_logo_2008.jpg" Stretch="Fill"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="6,73,6,10">
+            <Grid>
+                
+            </Grid>
+        </Border>
     </Grid>
 </Window>
