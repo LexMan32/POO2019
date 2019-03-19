@@ -27,18 +27,17 @@ namespace Loto
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            sp_tirages.Children.Add(new Tirage(sp_tirages.Children.Count + 1));
         }
 
         private void supBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            sp_tirages.Children.RemoveAt(sp_tirages.Children.Count - 1);
         }
 
         private void delBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            sp_tirages.Children.Clear();
         }
-
     }
 }

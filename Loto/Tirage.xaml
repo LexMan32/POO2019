@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Loto.Tirage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Loto"
+             mc:Ignorable="d" Width="498.333" Height="44.017">
+    <Grid>
+        <Label x:Name="lb_index" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="#FFACACAC" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_num1" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="60,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="Red" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_num2" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="100,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="Red" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_num3" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="140,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="Red" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_num4" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="180,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="Red" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_num5" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="220,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="Red" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_num6" Content="10" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="260,10,0,0" VerticalAlignment="Top" Height="35" Width="35" Background="Red" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_moyenne" Content="10.00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="310,10,0,0" VerticalAlignment="Top" Height="35" Width="55" Background="#FF1700FF" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_variance" Content="10.00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="370,10,0,0" VerticalAlignment="Top" Height="35" Width="55" Background="#FF1700FF" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+        <Label x:Name="lb_ecartType" Content="10.00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="430,10,0,0" VerticalAlignment="Top" Height="35" Width="55" Background="#FF1700FF" Foreground="White" FontWeight="Bold" FontStyle="Italic" BorderThickness="1"/>
+    </Grid>
+</UserControl>
