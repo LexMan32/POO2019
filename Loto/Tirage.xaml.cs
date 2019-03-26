@@ -39,16 +39,18 @@ namespace Loto
             valeurs.Add(rnd.Next(0, 100));
             valeurs.Add(rnd.Next(0, 100));
 
-            moyenne = 0;
+            double S1 = 0;
+            double S2 = 0;
+
             foreach (int valeur in valeurs)
             {
-                moyenne = moyenne + valeur;
+                S1 = S1 + valeur;
+                S2 = S2 + valeur * valeur;
             }
-            moyenne = moyenne / 6;
 
-            variance = 0;
-
-            ecartType = 0;
+            moyenne = S1 / 6;
+            variance = S2 / 6 - moyenne * moyenne;
+            ecartType = Math.Sqrt(variance);
 
             lb_index.Content = index;
             lb_num1.Content = valeurs[0];
