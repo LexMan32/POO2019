@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loto", "Loto\Loto.csproj", "{6B08C3E1-AB3B-4E69-ABF2-AB71195645DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCAppli", "MVCAppli\MVCAppli.csproj", "{313864B6-B6B7-4448-9F56-7EA7044EE555}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateMvc", "DelegateMvc\DelegateMvc.csproj", "{EBCA3660-5530-4E08-A9B6-2C86D077D138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6B08C3E1-AB3B-4E69-ABF2-AB71195645DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B08C3E1-AB3B-4E69-ABF2-AB71195645DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B08C3E1-AB3B-4E69-ABF2-AB71195645DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{313864B6-B6B7-4448-9F56-7EA7044EE555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{313864B6-B6B7-4448-9F56-7EA7044EE555}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{313864B6-B6B7-4448-9F56-7EA7044EE555}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{313864B6-B6B7-4448-9F56-7EA7044EE555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBCA3660-5530-4E08-A9B6-2C86D077D138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBCA3660-5530-4E08-A9B6-2C86D077D138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBCA3660-5530-4E08-A9B6-2C86D077D138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBCA3660-5530-4E08-A9B6-2C86D077D138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
