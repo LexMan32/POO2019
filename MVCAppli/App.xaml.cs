@@ -13,6 +13,6 @@ namespace MVCAppli
     /// </summary>
     public partial class App : Application
     {
-        public delegate void SetTbSaisieDelegate(string value);
+
     }
 }

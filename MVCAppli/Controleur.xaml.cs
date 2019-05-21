@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MVCAppli.App;
 
 namespace MVCAppli
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Controleur.xaml
     /// </summary>
-    public partial class Saisie1 : Window
+    public partial class Controleur : Window
     {
-        public SetTbSaisieDelegate setTbSaisieCallback;
-
-        public Saisie1()
+        public Controleur()
         {
             InitializeComponent();
-
-            Saisie2 saisie2 = new Saisie2();
-            saisie2.Show();
-        }
-
-        private void tbSaisie1_TextChanged(object sender, TextChangedEventArgs e)
-        {
         }
     }
 }
