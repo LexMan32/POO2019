@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExCalculOralConsole", "ExCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExCalculOralObjet", "ExCalculOralObjet\ExCalculOralObjet.csproj", "{4E4FE5AA-59CD-4ACD-9539-BEE8012EDE50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExCalculOralWinform", "ExCalculOralWinform\ExCalculOralWinform.csproj", "{60206668-A8B5-4E48-AA1C-17D1ECDEB755}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4E4FE5AA-59CD-4ACD-9539-BEE8012EDE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4FE5AA-59CD-4ACD-9539-BEE8012EDE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4FE5AA-59CD-4ACD-9539-BEE8012EDE50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60206668-A8B5-4E48-AA1C-17D1ECDEB755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60206668-A8B5-4E48-AA1C-17D1ECDEB755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60206668-A8B5-4E48-AA1C-17D1ECDEB755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60206668-A8B5-4E48-AA1C-17D1ECDEB755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
