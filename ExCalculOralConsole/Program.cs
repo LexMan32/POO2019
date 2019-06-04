@@ -3,7 +3,7 @@
  * Description  : Classe principale de l'application
  * Auteur       : A.Morel
  * Date         : 28.10.2017
- * Version      : 2.0 
+ * Version      : 3.0 
  */
 
 using System;
@@ -14,34 +14,34 @@ namespace ExCalculOralConsole
 {
     class Program
     {
-        // Constante de l'application
-        private const int CONSOLE_WIDTH = 80;
-        private const int OPERANDE_MAXIMUM = 4;
-        private const int NOMBRE_MAXIMUM = 100;
+        private const int CONSOLE_WIDTH = 80;       // Constante pour la largeur de la console
+        private const int OPERANDE_MAXIMUM = 4;     // Constante pour la valeur maximum de l'opérande
+        private const int NOMBRE_MAXIMUM = 100;     // Constante pour la valeur maximum de calcul
 
-        // Champs de l'application
-        private static int nbrOperande = 2;
-        private static TypeOperation typeOperation = TypeOperation.ADDITION;
-        private static int nbrCalcul = 10;
+        private static int nbrOperande = 2;                                     // Champ du nombre d'opérande (Préchargé 2)
+        private static TypeOperation typeOperation = TypeOperation.ADDITION;    // Champ du type d'opération (Préchargé +)
+        private static int nbrCalcul = 10;                                      // Champ du nombre de calcul (Préchargé 10)
 
         /// <summary>
-        /// Point d'entrée du programme et gestion du menu principale.
+        /// Point d'entrée du programme et gestion du menu principal.
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            bool quitterApp = false;    // Boolean pour quitter l'application
+            Menu choix;                 // Menu choisie par l'utilisateur
+
             // Affiche l'introduction
             AfficherIntroduction();
 
-            // Boolean et boucle pour quitter l'application
-            bool quitterApp = false;
+            // Boucle pour quitter l'application
             do
             {
                 // Affiche le menu
                 AfficherMenu();
 
                 // Demande la saisie pour le menu
-                Menu choix = SaisirChoixMenu();
+                choix = SaisirChoixMenu();
 
                 // Redirection d'après le choix de l'utilisateur
                 switch (choix)
@@ -52,34 +52,26 @@ namespace ExCalculOralConsole
 
                     // Saisie d'un nombre d'opérande
                     case Menu.SAISIE_NOMBRE_OPERANDE:
-                        AfficherChoixMenu(choix);
-                        SaisirNbrOperande();
-                        AfficherPause();
+                        GestionNbrOperande();
                         break;
 
                     // Saisie d'une opération
                     case Menu.SAISIE_OPERATION_DESIRE:
-                        AfficherChoixMenu(choix);
-                        SaisirTypeOperation();
-                        AfficherPause();
+                        GestionTypeOperation();
                         break;
 
                     // Saisie d'un nombre de calcul
                     case Menu.SAISIE_NOMBRE_CALCUL:
-                        AfficherChoixMenu(choix);
-                        SaisieNbrCalcul();
-                        AfficherPause();
+                        GestionNbrCalcul();
                         break;
 
                     // Lancement de la sequence de calcul
                     case Menu.LANCEMENT:
-                        AfficherChoixMenu(choix);
                         LancerSequenceCalcul();
-                        AfficherPause();
                         break;
 
+                    // Quitter l'application
                     case Menu.QUITTER:
-                        AfficherChoixMenu(choix);
                         quitterApp = AfficherValidationQuitter();
                         break;
                 }
@@ -113,14 +105,15 @@ namespace ExCalculOralConsole
         {
             // Genere la ligne de separation d'après la largeur de la console
             StringBuilder ligneHautBas = new StringBuilder();
-            for (int i = 0; i < CONSOLE_WIDTH; i++) { ligneHautBas.Append("*"); }
+            for (int i = 0; i < CONSOLE_WIDTH; i++)
+                ligneHautBas.Append("*");
 
-            // Affiche la ligne
+            // Affiche la ligne de séparation
             Console.WriteLine(ligneHautBas);
         }
 
         /// <summary>
-        /// Affiche l'introduction du programme
+        /// Affiche l'introduction du programme.
         /// </summary>
         static void AfficherIntroduction()
         {
@@ -139,7 +132,7 @@ namespace ExCalculOralConsole
         }
 
         /// <summary>
-        /// Affiche une pause (demande d'appuis sur un touche)
+        /// Affiche une pause (demande d'appuis sur une touche).
         /// </summary>
         static void AfficherPause()
         {
@@ -150,11 +143,8 @@ namespace ExCalculOralConsole
         }
 
         /// <summary>
-        /// Affiche le menu de l'application avec les valeurs passées en paramètre.
+        /// Affiche le menu de l'application avec les valeurs pour chacun des paramètres de l'application.
         /// </summary>
-        /// <param name="iNbrOperande">Nombre d'operande</param>
-        /// <param name="oTypeOperation">Type d'opération</param>
-        /// <param name="iNbrCalcul">Nomnre de calcul</param>
         static void AfficherMenu()
         {
             // Affiche l'en-tete
@@ -174,35 +164,34 @@ namespace ExCalculOralConsole
         }
 
         /// <summary>
-        /// Demande la saisie d'un choix de redirection pour le menu.
+        /// Demande la saisie d'une option pour le menu. Retourne l'énumération Menu.ERREUR_SAISIE
+        /// en cas d'erreur de saisie (mauvais numéro ou caractère).
         /// </summary>
         /// <returns>Menu demandé</returns>
         static Menu SaisirChoixMenu()
         {
             // Variable pour la valeur saisie
-            int choix;
+            int valeurSaisie;
 
             // Affiche le message de saisie
             Console.Write(" Entrer votre choix : ");
 
             try
             {
-                choix = int.Parse(Console.ReadLine());
+                valeurSaisie = int.Parse(Console.ReadLine());
             }
             catch
             {
                 // Mise à zero en cas de saisie d'un caractère
-                choix = 0;
+                valeurSaisie = 0;
             }
 
             // Verification si la valeur saisie correspond a un menu
-            if (choix > Enum.GetValues(typeof(Menu)).Cast<int>().Max())
-            {
-                choix = 0;
-            }
+            if (valeurSaisie > Enum.GetValues(typeof(Menu)).Cast<int>().Max())
+                valeurSaisie = 0;
 
-            // Retourne le choix converti en menu
-            return (Menu)choix;
+            // Retourne la valeur saisie converti en menu
+            return (Menu)valeurSaisie;
         }
 
         /// <summary>
@@ -221,8 +210,13 @@ namespace ExCalculOralConsole
         /// <summary>
         /// Saisie d'un nombre d'opérande par l'utilisateur
         /// </summary>
-        static void SaisirNbrOperande()
+        static void GestionNbrOperande()
         {
+            int valeurSaisie; // Valeur saisie par l'utilisateur
+
+            // Affiche le message de sélection du menu
+            AfficherChoixMenu(Menu.SAISIE_NOMBRE_OPERANDE);
+
             // Affiche la valeur maximum
             Console.WriteLine(" Valeur maximum : {0}", OPERANDE_MAXIMUM);
             Console.WriteLine();
@@ -230,110 +224,131 @@ namespace ExCalculOralConsole
             // Affiche la valeur actuelle
             Console.WriteLine("  Valeur actuelle : {0}", nbrOperande);
 
-            // Saisie d'une nouvelle valeur
+            // Message de saisie
             Console.Write("  Nouvelle valeur : ");
-            int choix;
             try
             {
-                choix = int.Parse(Console.ReadLine());
+                // Récupération de la valeur
+                valeurSaisie = int.Parse(Console.ReadLine());
 
-                // Validation de la valeur
-                if (choix <= 0 || choix > OPERANDE_MAXIMUM)
+                // Validation de la valeur saisie (Nombre positif et ne dépassant pas la valeur max)
+                if (valeurSaisie <= 0 || valeurSaisie > OPERANDE_MAXIMUM)
                 {
-                    AfficherMessageErreur("Valeur incorrect !");
-                    Console.WriteLine();
+                    // Affiche un message d'erreur
+                    AfficherMessageErreur("Valeur incorrect");
                 }
                 else
                 {
-                    Console.WriteLine();
-                    nbrOperande = choix;
+                    // Attribue la valeur saisie
+                    nbrOperande = valeurSaisie;
                 }
             }
             catch
             {
-                AfficherMessageErreur("Valeur incorrect !");
-                Console.WriteLine();
+                // Affiche un message d'erreur
+                AfficherMessageErreur("Valeur incorrect");
             }
+
+            // Affiche une pause
+            Console.WriteLine();
+            AfficherPause();
         }
 
         /// <summary>
         /// Saisie d'un type d'opération d'après l'énumération des TypeOperation.
         /// </summary>
-        /// <returns>TypeOperation</returns>
-        static void SaisirTypeOperation()
+        static void GestionTypeOperation()
         {
+            int valeurSaisie; // Valeur saisie par l'utilisateur 
+
+            // Affiche le message de sélection du menu
+            AfficherChoixMenu(Menu.SAISIE_OPERATION_DESIRE);
+
             // Affiche les saisie possible d'après l'énumération
             Console.Write(" Saisie possible : ");
             foreach (TypeOperation operation in Enum.GetValues(typeof(TypeOperation)))
-            {
                 Console.Write("({0} : {1}) ", (int)operation, operation.GetDescription());
-            }
             Console.WriteLine();
             Console.WriteLine();
 
             // Affiche la valeur actuelle
             Console.WriteLine("  Valeur actuelle : {0}", (int)typeOperation);
 
-            // Saisie d'une nouvelle valeur
+            // Message de saisie
             Console.Write("  Nouvelle valeur : ");
-            int choix;
             try
             {
-                choix = int.Parse(Console.ReadLine());
+                // Récupération de la valeur saisie
+                valeurSaisie = int.Parse(Console.ReadLine());
 
-                // Validation de la valeur
-                if (choix <= 0 || choix > Enum.GetValues(typeof(TypeOperation)).Cast<int>().Max())
+                // Validation de la valeur (Si positif et si correspond a une énum)
+                if (valeurSaisie <= 0 || valeurSaisie > Enum.GetValues(typeof(TypeOperation)).Cast<int>().Max())
                 {
-                    AfficherMessageErreur("Valeur incorrect !");
-                    Console.WriteLine();
+                    // Affiche un message d'erreur
+                    AfficherMessageErreur("Valeur incorrect");
                 }
                 else
                 {
-                    Console.WriteLine();
-                    typeOperation = (TypeOperation)choix;
+                    // Attribution de la valeur
+                    typeOperation = (TypeOperation)valeurSaisie;
                 }
             }
             catch
             {
-                AfficherMessageErreur("Valeur incorrect !");
-                Console.WriteLine();
+                // Affiche un message d'erreur
+                AfficherMessageErreur("Valeur incorrect");
             }
+
+            // Affiche une pause
+            Console.WriteLine();
+            AfficherPause();
         }
 
         /// <summary>
         /// Saisie d'un nombre de calcul par l'utilisateur.
         /// </summary>
-        static void SaisieNbrCalcul()
+        static void GestionNbrCalcul()
         {
+            int valeurSaisie; // Valeur saisie par l'utilisateur 
+
+            // Affiche le message de sélection du menu
+            AfficherChoixMenu(Menu.SAISIE_NOMBRE_CALCUL);
+
             // Affiche la valeur maximum
-            Console.WriteLine("Valeur maximum : {0}", NOMBRE_MAXIMUM);
+            Console.WriteLine("  Valeur maximum : {0}", NOMBRE_MAXIMUM);
+            Console.WriteLine();
+
             // Affiche la valeur actuelle
             Console.WriteLine("  Valeur actuelle : {0}", nbrCalcul);
 
-            // Saisie d'une nouvelle valeur
+            // Message de saisie
             Console.Write("  Nouvelle valeur : ");
-            int choix;
             try
             {
-                choix = int.Parse(Console.ReadLine());
+                // Récupération de la valeur saisie
+                valeurSaisie = int.Parse(Console.ReadLine());
 
-                // Validation de la valeur
-                if (choix <= 0 || choix > NOMBRE_MAXIMUM)
+                // Validation de la valeur (Si positif et inférieur au maximum)
+                if (valeurSaisie <= 0 || valeurSaisie > NOMBRE_MAXIMUM)
                 {
-                    AfficherMessageErreur("Valeur incorrect !");
-                    Console.WriteLine();
+                    // Affiche un message d'erreur
+                    AfficherMessageErreur("Valeur incorrect");
                 }
                 else
                 {
-                    Console.WriteLine();
-                    nbrCalcul = choix;
+                    // Attribution de la valeur
+                    nbrCalcul = valeurSaisie;
                 }
             }
             catch
             {
-                AfficherMessageErreur("Valeur incorrect !");
-                Console.WriteLine();
+                // Affiche un message d'erreur
+                AfficherMessageErreur("Valeur incorrect");
             }
+
+            // Affiche une pause
+            Console.WriteLine();
+            AfficherPause();
         }
 
         /// <summary>
@@ -341,11 +356,11 @@ namespace ExCalculOralConsole
         /// </summary>
         static void LancerSequenceCalcul()
         {
-            // Compteur de réponse correct
-            int nbrJuste = 0;
+            int nbrJuste = 0;                   // Compteur de réponse correct
+            Random generateur = new Random();   // Genérateur aléatoire de nombre
 
-            // Genérateur aléatoire de nombre
-            Random generateur = new Random();
+            // Affiche le message de sélection du menu
+            AfficherChoixMenu(Menu.LANCEMENT);
 
             // Boucle pour le nombre de calcul et le comptage  des lignes
             for (int numLigne = 1; numLigne < (nbrCalcul + 1); numLigne++)
@@ -413,6 +428,9 @@ namespace ExCalculOralConsole
             Console.WriteLine();
             Console.WriteLine("  Pourcentage de réponse correct : {0}%", (((double)nbrJuste / nbrCalcul) * 100));
             Console.WriteLine();
+
+            // Affiche une pause
+            AfficherPause();
         }
 
         /// <summary>
@@ -450,31 +468,24 @@ namespace ExCalculOralConsole
         }
 
         /// <summary>
-        /// Demande la confirmation pour quitter le programme
+        /// Demande la confirmation pour quitter le programme. Retourne True si la saisie
+        /// est égal a "o".
         /// </summary>
-        /// <returns>Confirmation (oui/non)</returns>
+        /// <returns>Confirmation (True,False)</returns>
         static bool AfficherValidationQuitter()
         {
-            bool quitter = false;
+            // Affiche le message de sélection du menu
+            AfficherChoixMenu(Menu.QUITTER);
 
+            // Message de saisie
             Console.Write(" Désirez-vous quitter le programme (o/n) ? : ");
 
+            // Retourne True si la caractère "o" est saisie
+            if (Console.ReadLine() == "o")
+                return true;
 
-
-            switch (Console.ReadLine().ToLower())
-            {
-                case "oui":
-                case "o":
-                case "yes":
-                case "y":
-                    quitter = true;
-                    break;
-                default:
-                    quitter = false;
-                    break;
-            }
-
-            return quitter;
+            // Par défaut, retourne False
+            return false;
         }
 
         /// <summary>
