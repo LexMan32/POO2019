@@ -3,7 +3,7 @@
  * Description  : Classe principale de l'application
  * Auteur       : A.Morel
  * Date         : 18.01.2018
- * Version      : 1.0
+ * Version      : 2.0
  */
 
 using System;
@@ -20,13 +20,14 @@ namespace CalculMoyenne
         // Variables du programme
         private static string nomBranche;
         private static double[] notes = new double[MAXIMUM_NOTE];
+        private static int nbrNotes = 0;
 
         /// <summary>
         /// Point d'entrée du programme, gestion de l'introduction et du menu principal. 
         /// </summary>
         static void Main(string[] args)
         {
-            afficherIntro();
+            AfficherIntro();
 
             bool quitterApp = false;
 
@@ -42,10 +43,10 @@ namespace CalculMoyenne
                         GestionNomBranche();
                         break;
                     case "b":
-                        AjouterNote();
+                        GestionAjouterNote();
                         break;
                     case "c":
-                        SupprimerNote();
+                        GestionSupprimerNote();
                         break;
                     case "d":
                         ModifierNote();
@@ -66,7 +67,7 @@ namespace CalculMoyenne
         /// Affiche l'introduction de l'application et 
         /// demande l'appuie sur une touche pour continuer.
         /// </summary>
-        static void afficherIntro()
+        static void AfficherIntro()
         {
             AfficherEnTete("Introduction");
 
@@ -141,14 +142,9 @@ namespace CalculMoyenne
         /// <summary>
         /// Menu de gestion pour ajouter une note.
         /// </summary>
-        static void AjouterNote()
+        static void GestionAjouterNote()
         {
             AfficherEnTete("Ajouter une note");
-
-            int indexNote = 0;
-
-            while (notes[indexNote] != 0 && indexNote != MAXIMUM_NOTE - 1)
-                indexNote++;
 
             Console.Write("  Nouvelle valeur : ");
 
@@ -157,9 +153,13 @@ namespace CalculMoyenne
                 double note = double.Parse(Console.ReadLine());
 
                 if (note < 1 || note > 6)
+                {
                     AfficherMessageErreur("Valeur incorrecte !");
+                }
                 else
-                    notes[indexNote] = note;
+                {
+                    AjouterNote(note);
+                }
             }
             catch
             {
@@ -171,10 +171,20 @@ namespace CalculMoyenne
         }
 
         /// <summary>
+        /// Ajoute une note au tableau
+        /// </summary>
+        /// <param name="note">Note</param>
+        static void AjouterNote(double note)
+        {
+            notes[nbrNotes] = note;
+            nbrNotes++;
+        }
+
+        /// <summary>
         /// Menu de gestion pour supprimer une note. Utilise la méthode
         /// de sélection d'une note pour connaitre la note à supprimer.
         /// </summary>
-        static void SupprimerNote()
+        static void GestionSupprimerNote()
         {
             int index = SelectionnerNote();
 
@@ -187,7 +197,7 @@ namespace CalculMoyenne
                 switch (Console.ReadLine())
                 {
                     case "o":
-                        notes[index] = 0;
+                        SupprimerNote(index);
                         break;
                     case "n":
                         break;
@@ -199,6 +209,19 @@ namespace CalculMoyenne
                 Console.WriteLine();
                 AfficherPause();
             }
+        }
+
+        /// <summary>
+        /// Supprime la note dans le tableau qui se trouve a l'index donne en paramètre.
+        /// </summary>
+        /// <param name="index">Index de la note</param>
+        static void SupprimerNote(int index)
+        {
+            for (int i = index; i < MAXIMUM_NOTE; i++)
+            {
+                notes[index] = notes[index + 1];
+            }
+            nbrNotes--;
         }
 
         /// <summary>
@@ -249,13 +272,11 @@ namespace CalculMoyenne
         {
             AfficherEnTete("Sélection d'une note");
 
-            int index = 0;
             int choixUtil = -1;
 
-            foreach (double note in notes)
+            for (int index = 1; index <= nbrNotes; index++)
             {
-                index++;
-                Console.WriteLine(" {0} : {1}", index, note);
+                Console.WriteLine(" {0} : {1}", index, notes[index - 1]);
             }
             Console.WriteLine();
             Console.Write("  Entrer votre choix : ");
@@ -264,7 +285,7 @@ namespace CalculMoyenne
             {
                 choixUtil = int.Parse(Console.ReadLine());
 
-                if (choixUtil < 1 || choixUtil > index)
+                if (choixUtil < 1 || choixUtil > nbrNotes)
                 {
                     choixUtil = -1;
                     AfficherMessageErreur("Valeur incorrecte !");
@@ -277,8 +298,6 @@ namespace CalculMoyenne
                 AfficherMessageErreur("Valeur incorrecte !");
                 AfficherPause();
             }
-
-            Console.WriteLine();
 
             return choixUtil - 1;
         }
