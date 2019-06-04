@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loto", "Loto\Loto.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateMvc", "DelegateMvc\DelegateMvc.csproj", "{EBCA3660-5530-4E08-A9B6-2C86D077D138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExCalculOralConsole", "ExCalculOralConsole\ExCalculOralConsole.csproj", "{445821A4-0975-4AA4-9063-A5A1886AAE59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculOralConsole", "ExCalculOralConsole\CalculOralConsole.csproj", "{445821A4-0975-4AA4-9063-A5A1886AAE59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExCalculOralObjet", "ExCalculOralObjet\ExCalculOralObjet.csproj", "{4E4FE5AA-59CD-4ACD-9539-BEE8012EDE50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculOralObjet", "ExCalculOralObjet\CalculOralObjet.csproj", "{4E4FE5AA-59CD-4ACD-9539-BEE8012EDE50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExCalculOralWinform", "ExCalculOralWinform\ExCalculOralWinform.csproj", "{60206668-A8B5-4E48-AA1C-17D1ECDEB755}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculOralWinform", "ExCalculOralWinform\CalculOralWinform.csproj", "{60206668-A8B5-4E48-AA1C-17D1ECDEB755}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculMoyenne", "CalculMoyenne\CalculMoyenne.csproj", "{E3FB9536-9A30-472E-A368-14D1CC105089}"
 EndProject
