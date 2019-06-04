@@ -2,8 +2,8 @@
  * Projet       : CalculMoyenne
  * Description  : Classe principale de l'application
  * Auteur       : A.Morel
- * Date         : 18.01.2018
- * Version      : 2.0
+ * Date         : 30.01.2018
+ * Version      : 3.0
  */
 
 using System;
