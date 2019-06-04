@@ -3,7 +3,7 @@
  * Description  : Classe regroupant les énumérations du projet
  * Auteur       : A.Morel
  * Date         : 28.10.2017
- * Version      : 2.0 
+ * Version      : 3.0 
  */
 
 using System;
@@ -26,9 +26,11 @@ namespace ExCalculOralObjet
         [Description("Quantité de calculs suivis")]
         SAISIE_NOMBRE_CALCUL = 3,
         [Description("Lancement d'une séquence de calcul")]
-        LANCEMENT = 4,
+        LANCEMENT_SEQUENCE_CALCUL = 4,
+        [Description("Affichage de l'ancienne séquence de calcul")]
+        AFFICHAGE_ANCIENNE_SEQUENCE = 5,
         [Description("Quitter")]
-        QUITTER = 5
+        QUITTER = 6
     }
 
     /// <summary>
@@ -45,7 +47,7 @@ namespace ExCalculOralObjet
         [Description("/")]
         DIVISION = 4,
         [Description("m")]
-        ALEATOIRE =5,
+        ALEATOIRE = 5,
     }
 
     /// <summary>

@@ -3,14 +3,15 @@
  * Description  : Classe principale de l'application
  * Auteur       : A.Morel
  * Date         : 28.10.2017
- * Version      : 4.0 
+ * Version      : 5.0 
  */
 
+using ExCalculOralObjet;
 using System;
 using System.Linq;
 using System.Text;
 
-namespace ExCalculOralObjet
+namespace ExCalculOral
 {
     class Program
     {
@@ -21,6 +22,8 @@ namespace ExCalculOralObjet
         private static int nbrOperande = 2;                                     // Champ du nombre d'opérande (Préchargé 2)
         private static TypeOperation typeOperation = TypeOperation.ADDITION;    // Champ du type d'opération (Préchargé +)
         private static int nbrCalcul = 10;                                      // Champ du nombre de calcul (Préchargé 10)
+
+        private static Calcul[] ancienneSequenceCalcul;      // Tableau des calculs précédent
 
         /// <summary>
         /// Point d'entrée du programme et gestion du menu principal.
@@ -66,8 +69,13 @@ namespace ExCalculOralObjet
                         break;
 
                     // Lancement de la sequence de calcul
-                    case Menu.LANCEMENT:
+                    case Menu.LANCEMENT_SEQUENCE_CALCUL:
                         LancerSequenceCalcul();
+                        break;
+
+                    // Affichage de l'ancienne séquence de calcul
+                    case Menu.AFFICHAGE_ANCIENNE_SEQUENCE:
+                        AfficherAncienneSequenceCalcul();
                         break;
 
                     // Quitter l'application
@@ -104,12 +112,12 @@ namespace ExCalculOralObjet
         static void AfficherLigneSeparation()
         {
             // Genere la ligne de separation d'après la largeur de la console
-            StringBuilder ligneHautBas = new StringBuilder();
+            StringBuilder ligneSeparation = new StringBuilder();
             for (int i = 0; i < CONSOLE_WIDTH; i++)
-                ligneHautBas.Append("*");
+                ligneSeparation.Append("*");
 
             // Affiche la ligne de séparation
-            Console.WriteLine(ligneHautBas);
+            Console.WriteLine(ligneSeparation);
         }
 
         /// <summary>
@@ -154,8 +162,9 @@ namespace ExCalculOralObjet
             Console.WriteLine("  1. {0} <{1}>", Menu.SAISIE_NOMBRE_OPERANDE.GetDescription(), nbrOperande);
             Console.WriteLine("  2. {0} <{1}>", Menu.SAISIE_OPERATION_DESIRE.GetDescription(), typeOperation.GetDescription());
             Console.WriteLine("  3. {0} <{1}>", Menu.SAISIE_NOMBRE_CALCUL.GetDescription(), nbrCalcul);
-            Console.WriteLine("  4. {0}", Menu.LANCEMENT.GetDescription());
-            Console.WriteLine("  5. {0}", Menu.QUITTER.GetDescription());
+            Console.WriteLine("  4. {0}", Menu.LANCEMENT_SEQUENCE_CALCUL.GetDescription());
+            Console.WriteLine("  5. {0}", Menu.AFFICHAGE_ANCIENNE_SEQUENCE.GetDescription());
+            Console.WriteLine("  6. {0}", Menu.QUITTER.GetDescription());
             Console.WriteLine();
 
             // Affiche une séparation
@@ -356,30 +365,33 @@ namespace ExCalculOralObjet
         /// </summary>
         static void LancerSequenceCalcul()
         {
-            Calcul calcul;                      // Objet représentant un calcul
             Random generateur = new Random();   // Genérateur aléatoire de nombre
+            Calcul calcul;                      // Objet représentant un calcul
             bool erreurSaisie = false;          // Boolean pour l'erreur de saisie
             int nbrJuste = 0;                   // Compteur de réponse correct
 
+            // Initilisation de la liste des anciens calculs
+            ancienneSequenceCalcul = new Calcul[nbrCalcul];
+
             // Affiche le message de sélection du menu
-            AfficherChoixMenu(Menu.LANCEMENT);
+            AfficherChoixMenu(Menu.LANCEMENT_SEQUENCE_CALCUL);
 
             // Boucle pour le nombre de calcul et le comptage  des lignes
-            for (int numLigne = 1; numLigne < (nbrCalcul + 1); numLigne++)
+            for (int numLigne = 1; numLigne <= nbrCalcul; numLigne++)
             {
                 // Initialisation de l'objet Calcul
-                calcul = new Calcul(nbrOperande, typeOperation);
+                calcul = new Calcul(generateur, nbrOperande, typeOperation);
 
                 // Boucle pour la saisie d'une lettre
                 do
                 {
                     // Ecrit le calcul
-                    Console.Write("   No {0} : {1} {2} {3} = ", numLigne, calcul.operateurUn, calcul.typeOperation.GetDescription(), calcul.operateurDeux);
+                    Console.Write("   No {0} : {1}", numLigne, calcul.construireCalcul(false));
 
                     // TryParse de la saisie de l'utilisateur
                     try
                     {
-                        calcul.reponseUtilisateur = int.Parse(Console.ReadLine());
+                        calcul.ReponseUtilisateur = int.Parse(Console.ReadLine());
                         erreurSaisie = false;
                     }
                     catch
@@ -390,6 +402,9 @@ namespace ExCalculOralObjet
                         Console.ResetColor();
                     }
                 } while (erreurSaisie);
+
+                // Inscrit le calcul dans la liste des anciens calcul
+                ancienneSequenceCalcul[numLigne - 1] = calcul;
 
                 // Test si le résultat est correct
                 if (calcul.verifierResultat())
@@ -421,11 +436,67 @@ namespace ExCalculOralObjet
             AfficherPause();
         }
 
+        static void AfficherAncienneSequenceCalcul()
+        {
+            int numLigne = 0;   // Variable pour l'affichage des numéros de ligne
+            int nbrJuste = 0;   // Variable pour l'affichage des statistique
+
+            // Affiche la confirmation de sélection du menu
+            AfficherChoixMenu(Menu.AFFICHAGE_ANCIENNE_SEQUENCE);
+
+            // Test pour le contenu de la liste
+            if (ancienneSequenceCalcul == null || ancienneSequenceCalcul.Length == 0)
+            {
+                // Si la liste est vide, affiche un message
+                Console.WriteLine("  Aucune séquence de calcul n'as été lancé !");
+                Console.WriteLine();
+            }
+            else
+            {
+                // Si la liste est remplie, parcours les éléments de la liste
+                foreach (Calcul calcul in ancienneSequenceCalcul)
+                {
+                    // Incremente le compteur de ligne
+                    numLigne++;
+
+                    // Affiche le calcul et la réponse de l'utilisateur
+                    Console.WriteLine("   No {0} : {1}", numLigne, calcul.construireCalcul(true));
+
+                    // Test si le résultat est correct
+                    if (calcul.verifierResultat())
+                    {
+                        nbrJuste++;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine("\t Correct !");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\t Incorrect ! Réponse : {0}", calcul.calculerResultat());
+                        Console.ResetColor();
+                    }
+                }
+
+                // Affiche les statistique de la partie
+                Console.WriteLine();
+                Console.WriteLine("  Nombre de calculs : {0}", numLigne);
+                Console.WriteLine();
+                Console.WriteLine("  Nombre de calcul corrects : {0}", nbrJuste);
+                Console.WriteLine("  Nombre de calcul incorrects : {0}", nbrCalcul - nbrJuste);
+                Console.WriteLine();
+                Console.WriteLine("  Pourcentage de réponse correct : {0}%", (((double)nbrJuste / numLigne) * 100));
+                Console.WriteLine();
+            }
+
+            // Affiche une pause
+            AfficherPause();
+        }
+
         /// <summary>
-        /// Demande la confirmation pour quitter le programme. Retourne True si la saisie
-        /// est égal a "o".
+        /// Demande la confirmation pour quitter le programme. 
         /// </summary>
-        /// <returns>Confirmation (True,False)</returns>
+        /// <returns>Vrai si la saisie est égal au caractère <o> ou <O></returns>
         static bool AfficherValidationQuitter()
         {
             // Affiche le message de sélection du menu
@@ -434,12 +505,8 @@ namespace ExCalculOralObjet
             // Message de saisie
             Console.Write(" Désirez-vous quitter le programme (o/n) ? : ");
 
-            // Retourne True si la caractère "o" est saisie
-            if (Console.ReadLine() == "o")
-                return true;
-
-            // Par défaut, retourne False
-            return false;
+            // Retourne la valeur du test
+            return (Console.ReadLine().ToLower() == "o");
         }
 
         /// <summary>
