@@ -2,8 +2,8 @@
  * Projet       : ExCalculOral
  * Description  : Classe regroupant les énumérations du projet
  * Auteur       : A.Morel
- * Date         : 25.10.2017
- * Version      : 1.0 
+ * Date         : 28.10.2017
+ * Version      : 2.0 
  */
 
 using System;
@@ -13,14 +13,21 @@ using System.Reflection;
 namespace ExCalculOralConsole
 {
     /// <summary>
-    /// Représente les onglets du menu
+    /// Représente les options du menu
     /// </summary>
     public enum Menu
     {
+        [Description("Erreur de saisie")]
+        ERREUR_SAISIE = 0,
+        [Description("Quantité maximum de chiffres des opérandes")]
         SAISIE_NOMBRE_OPERANDE = 1,
+        [Description("Genre d'opérations désirées (+,-,*,/,m)")]
         SAISIE_OPERATION_DESIRE = 2,
-        SAISIE_QUANTITE_CALCUL = 3,
+        [Description("Quantité de calculs suivis")]
+        SAISIE_NOMBRE_CALCUL = 3,
+        [Description("Lancement d'une séquence de calcul")]
         LANCEMENT = 4,
+        [Description("Quitter")]
         QUITTER = 5
     }
 
@@ -38,7 +45,7 @@ namespace ExCalculOralConsole
         [Description("/")]
         DIVISION = 4,
         [Description("m")]
-        ALEATOIRE =5,
+        ALEATOIRE = 5,
     }
 
     /// <summary>
